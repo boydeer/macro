@@ -1,0 +1,8 @@
+import time
+import pyautogui
+
+def click_at_position(x, y):
+    pyautogui.click(x, y)
+
+# Example: Click at position (100, 200)
+click_at_position(100, 200)
