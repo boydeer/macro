@@ -6,3 +6,28 @@ def click_at_position(x, y):
 
 # Example: Click at position (100, 200)
 click_at_position(100, 200)
+
+import datetime
+import requests
+
+def get_server_time():
+    try:
+        # Make a request to the NTP server
+        response = requests.get("http://worldtimeapi.org/api/ip")
+        response.raise_for_status()
+
+        # Extract the server time from the response
+        server_time_str = response.json()["utc_datetime"]
+        server_time = datetime.datetime.strptime(server_time_str, "%Y-%m-%dT%H:%M:%S.%fZ")
+
+        return server_time
+
+    except Exception as e:
+        print(f"Error fetching server time: {e}")
+        return None
+
+# Get and print the server time
+server_time = get_server_time()
+
+if server_time:
+    print(f"Server time: {server_time}")
